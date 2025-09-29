@@ -164,12 +164,17 @@ def download_audio(url: str, output_dir: str) -> str:
     """使用 yt-dlp 下載 YouTube 音訊"""
     update_progress("transcription", 10, "開始下載", "正在連接 YouTube...")
     
-    ydl_opts = {
-        'format': 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
-        'outtmpl': os.path.join(output_dir, 'audio.%(ext)s'),
-        'noplaylist': True,
-        'no_warnings': False,
-    }
+   ydl_opts = {
+       'format': 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
+       'outtmpl': os.path.join(output_dir, 'audio.%(ext)s'),
+       'noplaylist': True,
+       'no_warnings': False,
+       'extractor_retries': 3,
+       'fragment_retries': 3,
+       'retries': 3,
+       'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+       'cookiesfrombrowser': None,
+   }
     
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
