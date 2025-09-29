@@ -164,7 +164,7 @@ def download_audio(url: str, output_dir: str) -> str:
     """使用 yt-dlp 下載 YouTube 音訊"""
     update_progress("transcription", 10, "開始下載", "正在連接 YouTube...")
     
-   ydl_opts = {
+ydl_opts = {
        'format': 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio/best',
        'outtmpl': os.path.join(output_dir, 'audio.%(ext)s'),
        'noplaylist': True,
